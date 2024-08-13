@@ -56,7 +56,8 @@
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake /home/alex/nix-config#default";
+      switch = "sudo nixos-rebuild switch --flake /home/alex/nix-config#default";
+      update = "nix flake update /home/alex/nix-config";
     };
 
     history = {
@@ -75,14 +76,14 @@
     enable = true;
     shellIntegration.enableZshIntegration = true;
     settings = {
-      hide_window_decorations = true;
+      # hide_window_decorations = true;
       confirm_os_window_close = 0;
       dynamic_background_opacity = true;
       enable_audio_bell = false;
       mouse_hide_wait = "-1.0";
       window_padding_width = 10;
       background_opacity = "0.7";
-      background_blur = 5;
+      background_blur = 20;
       symbol_map =
         let
           mappings = [
