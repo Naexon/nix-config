@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
     ];
@@ -95,11 +96,11 @@
     description = "Alex";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-	kitty
-	haskellPackages.cabal-install
-	ghc
-	vscodium-fhs
-	whatsapp-for-linux
+      kitty
+      haskellPackages.cabal-install
+      ghc
+      vscodium-fhs
+      whatsapp-for-linux
     ];
   };
 
@@ -126,7 +127,7 @@
       TERMINAL = "pkgs.kitty";
     };
     systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       git
     ];

@@ -17,7 +17,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [
-#      "discord"
+      #      "discord"
     ];
 
   fonts.fontconfig.enable = true;
@@ -26,6 +26,7 @@
   # environment.
   home.packages = [
     pkgs.vim
+    pkgs.nixpkgs-fmt
     pkgs.htop
     pkgs.vesktop # Discord Client
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
@@ -82,28 +83,30 @@
       window_padding_width = 10;
       background_opacity = "0.7";
       background_blur = 5;
-      symbol_map = let
-        mappings = [
-          "U+23FB-U+23FE"
-          "U+2B58"
-          "U+E200-U+E2A9"
-          "U+E0A0-U+E0A3"
-          "U+E0B0-U+E0BF"
-          "U+E0C0-U+E0C8"
-          "U+E0CC-U+E0CF"
-          "U+E0D0-U+E0D2"
-          "U+E0D4"
-          "U+E700-U+E7C5"
-          "U+F000-U+F2E0"
-          "U+2665"
-          "U+26A1"
-          "U+F400-U+F4A8"
-          "U+F67C"
-          "U+E000-U+E00A"
-          "U+F300-U+F313"
-          "U+E5FA-U+E62B"
-        ];
-      in (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
+      symbol_map =
+        let
+          mappings = [
+            "U+23FB-U+23FE"
+            "U+2B58"
+            "U+E200-U+E2A9"
+            "U+E0A0-U+E0A3"
+            "U+E0B0-U+E0BF"
+            "U+E0C0-U+E0C8"
+            "U+E0CC-U+E0CF"
+            "U+E0D0-U+E0D2"
+            "U+E0D4"
+            "U+E700-U+E7C5"
+            "U+F000-U+F2E0"
+            "U+2665"
+            "U+26A1"
+            "U+F400-U+F4A8"
+            "U+F67C"
+            "U+E000-U+E00A"
+            "U+F300-U+F313"
+            "U+E5FA-U+E62B"
+          ];
+        in
+        (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
     };
   };
 
@@ -146,12 +149,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-# Adding custom gnome keyboard shortcuts
-# See https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/7
+  # Adding custom gnome keyboard shortcuts
+  # See https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/7
   dconf.settings =
     let
       inherit (builtins) length head tail listToAttrs genList;
-      range = a: b: if a < b then [a] ++ range (a+1) b else [];
+      range = a: b: if a < b then [ a ] ++ range (a + 1) b else [ ];
       globalPath = "org/gnome/settings-daemon/plugins/media-keys";
       path = "${globalPath}/custom-keybindings";
       mkPath = id: "${globalPath}/custom${toString id}";
@@ -160,37 +163,37 @@
         let
           checkSettings = { name, command, binding }@this: this;
           aux = i: list:
-            if isEmpty list then [] else
-              let
-                hd = head list;
-                tl = tail list;
-                name = mkPath i;
-              in
-                aux (i+1) tl ++ [ {
-                  name = mkPath i;
-                  value = checkSettings hd;
-                } ];
+            if isEmpty list then [ ] else
+            let
+              hd = head list;
+              tl = tail list;
+              name = mkPath i;
+            in
+            aux (i + 1) tl ++ [{
+              name = mkPath i;
+              value = checkSettings hd;
+            }];
           settingsList = (aux 0 settings);
         in
-          listToAttrs (settingsList ++ [
-            {
-              name = globalPath;
-              value = {
-                custom-keybindings = genList (i: "/${mkPath i}/") (length settingsList);
-              };
-            }
-          ]);
+        listToAttrs (settingsList ++ [
+          {
+            name = globalPath;
+            value = {
+              custom-keybindings = genList (i: "/${mkPath i}/") (length settingsList);
+            };
+          }
+        ]);
     in
-      mkSettings [
-        {
-          name = "open-kitty";
-          command = "kitty";
-          binding = "<Super>t";
-        }
-        {
-          name = "open-codium";
-          command = "codium";
-          binding = "<Super>c";
-        }
-      ];
+    mkSettings [
+      {
+        name = "open-kitty";
+        command = "kitty";
+        binding = "<Super>t";
+      }
+      {
+        name = "open-codium";
+        command = "codium";
+        binding = "<Super>c";
+      }
+    ];
 }
