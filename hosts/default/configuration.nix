@@ -16,7 +16,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "thinkpad"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -97,10 +97,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kitty
-      haskellPackages.cabal-install
-      ghc
-      vscodium-fhs
-      whatsapp-for-linux
     ];
   };
 

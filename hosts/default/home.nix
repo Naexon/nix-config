@@ -24,12 +24,19 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.vim
-    pkgs.nixpkgs-fmt
-    pkgs.htop
-    pkgs.vesktop # Discord Client
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+  home.packages = with pkgs; [
+    vim
+    nixpkgs-fmt
+    htop
+    floorp
+    vesktop # Discord Client
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+
+    haskellPackages.cabal-install
+    ghc
+    vscodium-fhs
+    whatsapp-for-linux
+    python3
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
