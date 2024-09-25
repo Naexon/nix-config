@@ -9,7 +9,8 @@
 
     shellAliases = {
       ll = "ls -l";
-      switch = "sudo nixos-rebuild switch --flake ${userSettings.repoDirectory}#${systemSettings.profile}";
+      switch = "nh os switch -H ${systemSettings.profile} ${userSettings.repoDirectory}";
+      switch-update = "nh os switch -u -H ${systemSettings.profile} ${userSettings.repoDirectory}";
       update = "nix flake update ${userSettings.repoDirectory}";
     };
 

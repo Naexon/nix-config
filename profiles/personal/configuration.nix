@@ -4,6 +4,9 @@
   imports =
     [
       ./hardware-configuration.nix
+
+      ../../modules/system/nh.nix
+
       home-manager.nixosModules.default
     ];
 
