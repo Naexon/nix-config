@@ -2,21 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, home-manager, systemSettings, userSettings, ... }:
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      home-manager.nixosModules.default
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "thinkpad"; # Define your hostname.
+  networking.hostName = systemSettings.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -41,7 +41,7 @@
   time.timeZone = "Europe/Vienna";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "de_AT.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_AT.UTF-8";
@@ -60,8 +60,8 @@
 
   services.flatpak.enable = true;
 
-  programs.hyprland.enable = true;
-  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  # programs.hyprland.enable = true;
+  # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -99,19 +99,17 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.alex = {
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "Alex";
+    description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kitty
-    ];
+    packages = [];
   };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "alex" = import ./home.nix;
+      ${userSettings.username} = import ./home.nix;
     };
   };
 
@@ -134,12 +132,13 @@
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       git
+      kitty
 
-      waybar
-      dunst
-      libnotify
-      swww
-      rofi-wayland
+      # waybar
+      # dunst
+      # libnotify
+      # swww
+      # rofi-wayland
     ];
   };
 

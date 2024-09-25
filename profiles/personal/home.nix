@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, systemSettings, userSettings, ... }:
 
 # let
 #     startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -9,6 +9,10 @@
 #     '';
 # in
 {
+
+  imports = [
+    ../../modules/user/zsh.nix
+  ];
 
   # wayland.windowManager.hyprland = {
   #   enable = true;
@@ -39,8 +43,8 @@
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "alex";
-  home.homeDirectory = "/home/alex";
+  home.username = userSettings.username;
+  home.homeDirectory = userSettings.homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -69,6 +73,8 @@
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     libreoffice-still
+    zed-editor
+    thunderbird
 
     haskellPackages.cabal-install
     ghc
@@ -93,33 +99,33 @@
     # '')
   ];
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+  # programs.zsh = {
+  #   enable = true;
+  #   enableCompletion = true;
+  #   autosuggestion.enable = true;
+  #   syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      ll = "ls -l";
-      switch = "sudo nixos-rebuild switch --flake /home/alex/nix-config#default";
-      update = "nix flake update /home/alex/nix-config";
-    };
+  #   shellAliases = {
+  #     ll = "ls -l";
+  #     switch = "sudo nixos-rebuild switch --flake ${userSettings.repoDirectory}#${systemSettings.profile}";
+  #     update = "nix flake update ${userSettings.repoDirectory}";
+  #   };
 
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
+  #   history = {
+  #     size = 10000;
+  #     path = "${config.xdg.dataHome}/zsh/history";
+  #   };
 
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "robbyrussell";
-    };
-  };
+  #   oh-my-zsh = {
+  #     enable = true;
+  #     plugins = [ "git" ];
+  #     theme = "robbyrussell";
+  #   };
+  # };
 
   programs.kitty = {
     enable = true;
-    shellIntegration.enableZshIntegration = true;
+    # shellIntegration.enableZshIntegration = true;
     settings = {
       # hide_window_decorations = true;
       confirm_os_window_close = 0;
