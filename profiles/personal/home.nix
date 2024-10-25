@@ -72,6 +72,13 @@
     vscodium-fhs
     whatsapp-for-linux
     python3
+
+    anytype
+    gnome-tweaks
+
+    nom
+
+    asdf-vm
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
