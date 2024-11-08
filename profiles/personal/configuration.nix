@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
 
       ../../modules/system/nh.nix
+      ../../modules/system/podman.nix
 
       home-manager.nixosModules.default
     ];
