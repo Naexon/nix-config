@@ -11,7 +11,9 @@
 {
 
   imports = [
-    ../../modules/user/zsh.nix
+    ../../modules/user/shell/starship.nix
+    ../../modules/user/shell/zsh.nix
+    
     ../../modules/user/kitty.nix
     ../../modules/user/gnome-shortcuts.nix
   ];
