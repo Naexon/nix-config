@@ -10,7 +10,7 @@
     enable = true;
     
     font = {
-      name = "FiraCode Nerd Font";
+      name = "JetBrainsMono Nerd Font";
     };
 
     shellIntegration.enableZshIntegration = true;

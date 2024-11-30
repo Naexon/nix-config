@@ -63,15 +63,16 @@
     htop
     floorp
     vesktop # Discord Client
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    
+    # (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.jetbrains-mono
 
     libreoffice-still
     zed-editor
-    thunderbird
 
-    haskellPackages.cabal-install
-    ghc
     vscodium-fhs
+    vscode
+
     whatsapp-for-linux
     python3
 
@@ -79,8 +80,6 @@
     gnome-tweaks
 
     nom
-
-    asdf-vm
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
