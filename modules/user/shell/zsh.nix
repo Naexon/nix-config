@@ -9,8 +9,8 @@
 
     shellAliases = {
       ll = "ls -l";
-      switch = "nh os switch -H ${systemSettings.profile} ${userSettings.repoDirectory}";
-      switch-update = "nh os switch -u -H ${systemSettings.profile} ${userSettings.repoDirectory}";
+      switch = "sudo nh os switch -H ${systemSettings.profile} ${userSettings.repoDirectory}";
+      switch-update = "sudo nh os switch -u -H ${systemSettings.profile} ${userSettings.repoDirectory}";
       update = "nix flake update ${userSettings.repoDirectory}";
     };
 

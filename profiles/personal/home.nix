@@ -67,7 +67,7 @@
     libreoffice-still
     zed-editor
 
-    vscodium-fhs
+    # vscodium-fhs
     vscode
 
     python3
