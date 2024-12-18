@@ -117,6 +117,9 @@
       git
       kitty
 
+      openssl
+      pkg-config
+
       # waybar
       # dunst
       # libnotify

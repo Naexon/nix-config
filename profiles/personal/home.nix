@@ -50,10 +50,7 @@
 
   home.stateVersion = "24.05";
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (pkgs.lib.getName pkg) [
-      #      "discord"
-    ];
+  nixpkgs.config.allowUnfree = true;
 
   fonts.fontconfig.enable = true;
 
@@ -73,13 +70,15 @@
     vscodium-fhs
     vscode
 
-    whatsapp-for-linux
     python3
 
     anytype
     gnome-tweaks
 
     nom
+
+    cargo
+    steam-run
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
