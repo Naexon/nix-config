@@ -77,7 +77,9 @@
 
     nom
 
-    cargo
+    rustup
+    libgcc
+
     steam-run
   ];
 
