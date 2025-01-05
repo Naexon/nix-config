@@ -9,6 +9,7 @@
 
     shellAliases = {
       ll = "ls -l";
+      # you cannot use sudo here
       switch = "nh os switch -H ${systemSettings.profile} ${userSettings.repoDirectory}";
       switch-update = "nh os switch -u -H ${systemSettings.profile} ${userSettings.repoDirectory}";
       update = "nix flake update ${userSettings.repoDirectory}";

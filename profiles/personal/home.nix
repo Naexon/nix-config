@@ -70,17 +70,20 @@
     # vscodium-fhs
     vscode
 
-    python3
-
     anytype
     gnome-tweaks
 
     nom
 
     rustup
-    libgcc
+    gcc_multi
+
+    python3
 
     steam-run
+
+    zoxide
+    jetbrains.rust-rover
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
