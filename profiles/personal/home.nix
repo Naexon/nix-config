@@ -60,6 +60,7 @@
     htop
     floorp
     vesktop # Discord Client
+    vlc
     
     # (nerdfonts.override { fonts = [ "FiraCode" ]; })
     nerd-fonts.jetbrains-mono
@@ -83,7 +84,8 @@
     steam-run
 
     zoxide
-    jetbrains.rust-rover
+    jetbrains.pycharm-professional
+    openconnect
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

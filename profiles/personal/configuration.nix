@@ -15,6 +15,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+
   networking.hostName = systemSettings.hostname;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -105,6 +107,9 @@
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "${userSettings.username}" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
